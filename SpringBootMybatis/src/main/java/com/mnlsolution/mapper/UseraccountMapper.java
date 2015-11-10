@@ -24,7 +24,7 @@ public interface  UseraccountMapper {
 	Useraccount selectOneUseraccount(String loginid);   
 
 	@Update("update useraccount set upddate=#{upddate}, username=#{username} where loginid = #{loginid}") 
-	void updateUseraccount(Useraccount useraccount);
+	int updateUseraccount(Useraccount useraccount);
 
 	@Delete("delete from useraccount where loginid = #{loginid}") 
 	void deleteUseraccount(String loginid);
