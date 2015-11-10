@@ -1,5 +1,7 @@
 package com.mnlsolution.mapper;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -23,7 +25,7 @@ public interface  UseraccountMapper {
 	@Select("select useridx, loginid, passwd, email, username, regdate, upddate from useraccount where loginid = #{loginid}") 	
 	Useraccount selectOneUseraccount(String loginid);   
 
-	@Update("update useraccount set upddate=#{upddate}, username=#{username} where loginid = #{loginid}") 
+	@Update("update useraccount set upddate=#{upddate}, username=#{username} where loginid = #{loginid}")
 	int updateUseraccount(Useraccount useraccount);
 
 	@Delete("delete from useraccount where loginid = #{loginid}") 

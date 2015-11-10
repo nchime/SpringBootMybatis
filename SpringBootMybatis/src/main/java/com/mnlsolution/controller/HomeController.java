@@ -1,11 +1,10 @@
 package com.mnlsolution.controller;
 
+
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mnlsolution.domain.Useraccount;
 import com.mnlsolution.mapper.UseraccountMapper;
 
-@RestController
+@Controller
 @RequestMapping("/")
 public class HomeController {
 
@@ -27,6 +26,16 @@ public class HomeController {
 
 	@Autowired
 	UseraccountMapper mapper;
+	
+	
+	@RequestMapping("/") 
+	public String home() {
+		logger.info(">>>> home controller"); 
+		
+		return "redirect:/list";
+	} 
+	
+	
 
 	@RequestMapping("/list")
 	public @ResponseBody List<Useraccount> list() {
@@ -41,7 +50,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public Useraccount insert(@RequestParam(value = "loginid") String loginid,
+	public @ResponseBody Useraccount insert(@RequestParam(value = "loginid") String loginid,
 			@RequestParam(value = "passwd") String passwd, @RequestParam(value = "username") String username,
 			@RequestParam(value = "email") String email) {
 		logger.info(">>> insert Controller");
@@ -78,7 +87,7 @@ public class HomeController {
 		ua.setUsername(username);
 		Date cd = new Date();
 		ua.setUpddate(new Timestamp(cd.getTime()));
-		logger.info("resut : {}", ua.toString());		
+		logger.info("result : {}", ua.toString());		
 
 		mapper.updateUseraccount(ua);
 
